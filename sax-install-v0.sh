@@ -104,8 +104,9 @@ if [ -f "$SAX_DOWNLOAD_BUNDLE_PATH" ]
 	echo "Successfully moved StreamAnalytix.war jar to server/tomcat/webapps !!"
 	
 	#templates/azure-template/cloud-conf-template.yaml
-	cd /saxHdInsightApp/StreamAnalytix/conf/yaml
-	mkdir -p /templates/azure-template/
+	cd /saxHdInsightApp/StreamAnalytix/conf/yaml/templates
+	mkdir azure-template
+	cd /saxHdInsightApp/StreamAnalytix/conf/yaml/templates/azure-template
 	wget -O cloud-conf-template.yaml $SAX_ENV_CONF_DOWNLOAD_LINK
         else
 		echo "$SAX_DOWNLOAD_JAR_NAME not found in $SAX_HOME !!"
@@ -125,7 +126,7 @@ echo "Configuring StreamAnalytix env-conf.yaml & config.properties with user : $
 cd "$SAX_HOME"
 retry 3 wget -O "$SAX_CONF_SHELL_NAME" "$SAX_CONF_DOWNLOAD_LINK"
 chmod 755 $SAX_CONF_SHELL_NAME
-./sax-yaml-configure-v0.sh $CLUSTER_NAME $HDI_ADMIN $HDI_PWD
+./sax-yaml-configure-v01.sh $CLUSTER_NAME $HDI_ADMIN $HDI_PWD
 echo "Installing StreamAnalytix dependencies completed !! "
 
 # Starting StreamAnalytix WebApp
