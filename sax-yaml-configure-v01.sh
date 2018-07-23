@@ -109,13 +109,13 @@ SAX_ZK_CONFIG_PARENT="/sax-config_$SAX_HOST_IP"
 sed -ri 's|^(\s*)(sax.installation.dir\s*:\s*"."\s*$)|\1sax.installation.dir: '"$SAX_INSTALLATION_DIR"'|' $CLOUD_TEMPLATE_YAML_FILE
 sed -ri 's|^(\s*)(sax.ui.host\s*:\s*localhost\s*$)|\1sax.ui.host: '"$SAX_FULL_HOST_NAME"'|' $CLOUD_TEMPLATE_YAML_FILE
 sed -ri 's|^(\s*)(sax.web.url\s*:\s*http://localhost:8090/StreamAnalytix\s*$)|\1sax.web.url: '"$SAX_WEB_URL"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(database.dialect\s*:\s*hypersql\s*$)|\1database.dialect: 'postgresql'|' $CLOUD_TEMPLATE_YAML_FILE
+#sed -ri 's|^(\s*)(database.dialect\s*:\s*hypersql\s*$)|\1database.dialect: 'postgresql'|' $CLOUD_TEMPLATE_YAML_FILE
 
 ## replace HDInsight cluster deatils at env-config.yaml
 
 sed -ri 's|^(\s*)(url\s*:\s*"http://localhost:8080"\s*$)|\1url: '"$HDINSIGHT_CLUSTER_URL"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(username\s*:\s*""\s*$)|\1username: '"$HDI_ADMIN"'|' $CLOUD_TEMPLATE_YAML_FILE
-#sed -ri 's|^(\s*)(password\s*:\s*""\s*$)|\1password: '"$HDI_ADMIN_PWD"'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(username\s*:\s*"admin"\s*$)|\1username: '"$HDI_ADMIN"'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(password\s*:\s*"admin"\s*$)|\1password: '"$HDI_PWD"'|' $CLOUD_TEMPLATE_YAML_FILE
 sed -ri 's|^(\s*)(clustername\s*:\s*""\s*$)|\1clustername: '"$CLUSTER_NAME"'|' $CLOUD_TEMPLATE_YAML_FILE
 
 echo "-----------------YARN_RESOURCE_MANAGER-----------------"
@@ -166,12 +166,12 @@ echo "JDBC_DRIVER : $JDBC_DRIVER"
 echo "JDBC_URL : $JDBC_URL"
 
 ## replace jdbc configurations at env-config.yaml
-sed -ri 's|^(\s*)(driver\s*:\s*"org.hsqldb.jdbc.JDBCDriver"\s*$)|\1#driver: '"org.hsqldb.jdbc.JDBCDriver"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(#driver\s*:\s*org.postgresql.Driver\s*$)|\1driver: '"$JDBC_DRIVER"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(url\s*:\s*"jdbc:hsqldb:hsql://localhost:9001/saxhsqldb"\s*$)|\1#url: '"jdbc:hsqldb:hsql://localhost:9001/saxhsqldb"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(#url\s*:\s*"jdbc:postgresql://localhost:5432/streamanalytix"\s*$)|\1url: '"$JDBC_URL"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(username\s*:\s*"SA"\s*$)|\1username: '"$JDBC_USERNAME"'|' $CLOUD_TEMPLATE_YAML_FILE
-sed -ri 's|^(\s*)(password\s*:\s*""\s*$)|\1password: '"$JDBC_PASSWORD"'|' $CLOUD_TEMPLATE_YAML_FILE
+#sed -ri 's|^(\s*)(driver\s*:\s*"org.hsqldb.jdbc.JDBCDriver"\s*$)|\1#driver: '"org.hsqldb.jdbc.JDBCDriver"'|' $CLOUD_TEMPLATE_YAML_FILE
+#sed -ri 's|^(\s*)(driver\s*:\s*org.postgresql.Driver\s*$)|\1driver: '"$JDBC_DRIVER"'|' $CLOUD_TEMPLATE_YAML_FILE
+#sed -ri 's|^(\s*)(url\s*:\s*"jdbc:hsqldb:hsql://localhost:9001/saxhsqldb"\s*$)|\1#url: '"jdbc:hsqldb:hsql://localhost:9001/saxhsqldb"'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(url\s*:\s*"jdbc:postgresql://localhost:5432/streamanalytix"\s*$)|\1url: '"$JDBC_URL"'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(username\s*:\s*"postgres"\s*$)|\1username: '"$JDBC_USERNAME"'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(password\s*:\s*"postgres"\s*$)|\1password: '"$JDBC_PASSWORD"'|' $CLOUD_TEMPLATE_YAML_FILE
 
 echo "-----------------RMQ-----------------"
 
