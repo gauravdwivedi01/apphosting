@@ -109,7 +109,7 @@ SAX_ZK_CONFIG_PARENT="/sax-config_$SAX_HOST_IP"
 sed -ri 's|^(\s*)(sax.installation.dir\s*:\s*"."\s*$)|\1sax.installation.dir: '"$SAX_INSTALLATION_DIR"'|' $CLOUD_TEMPLATE_YAML_FILE
 sed -ri 's|^(\s*)(sax.ui.host\s*:\s*localhost\s*$)|\1sax.ui.host: '"$SAX_FULL_HOST_NAME"'|' $CLOUD_TEMPLATE_YAML_FILE
 sed -ri 's|^(\s*)(sax.web.url\s*:\s*http://localhost:8090/StreamAnalytix\s*$)|\1sax.web.url: '"$SAX_WEB_URL"'|' $CLOUD_TEMPLATE_YAML_FILE
-#sed -ri 's|^(\s*)(database.dialect\s*:\s*hypersql\s*$)|\1database.dialect: 'postgresql'|' $CLOUD_TEMPLATE_YAML_FILE
+sed -ri 's|^(\s*)(database.dialect\s*:\s*hypersql\s*$)|\1database.dialect: 'postgresql'|' $CLOUD_TEMPLATE_YAML_FILE
 
 ## replace HDInsight cluster deatils at env-config.yaml
 
