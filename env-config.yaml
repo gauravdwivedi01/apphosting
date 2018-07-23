@@ -6,7 +6,7 @@ sax-config:
     spark:
       home: /usr/hdp/2.4.2.0-258/spark
       #Spark cluster manager details accepts 2 types of values "yarn" or "standalone"
-      cluster.manager: "standalone"
+      cluster.manager: "yarn"
       master: spark://localhost:7077
       ui.host: localhost
       ui.port: 8080
@@ -46,16 +46,10 @@ sax-config:
       stomp.connection.url: localhost:61613
       
     jdbc:
-      driver: "org.hsqldb.jdbc.JDBCDriver"
-      #driver: org.postgresql.Driver
-      #driver: com.mysql.jdbc.Driver
-      #driver: oracle.jdbc.driver.OracleDriver
-      #url: "jdbc:postgresql://localhost:5432/streamanalytix"
-      url: "jdbc:hsqldb:hsql://localhost:9001/saxhsqldb"
-      #url: "jdbc:mysql://localhost:3306/streamanalytix"
-      #url: "jdbc:oracle:thin:@localhost:1521:SAX"
-      username: "SA"
-      password: ""
+      driver: org.postgresql.Driver
+      url: "jdbc:postgresql://localhost:5432/streamanalytix"      
+      username: "postgres"
+      password: "postgres"
 
     ldap: 
       url: "ldap://localhost:10389"
@@ -163,8 +157,8 @@ sax-config:
         # Cluster or distribution manager types "ambari" or "cdh"
         type: "ambari"
         url: "http://localhost:8080"
-        username: ""
-        password: ""
+        username: "admin"
+        password: "admin"
         clustername: ""
       # Spark versions "spark2" or "spark1"
       spark.version: "spark2"
@@ -172,7 +166,7 @@ sax-config:
     system-config:
       # ___1. GENERAL
       # Creates default connection for the components specified in this property.
-      components.supported: rabbitmq,activemq,kafka,hbase,cassandra,solr,elasticsearch,hdfs,hiveEmitter
+      components.supported: rabbitmq,kafka,hbase,cassandra,solr,elasticsearch,hdfs,hiveEmitter
       # Database used by application. Possible values are mysql, postgresql, oracle
       database.dialect: hypersql
       # Message Queuing System related properties. Possible values are RABBITMQ (for rabbitMQ) or ACTIVEMQ (for activeMQ) ######
