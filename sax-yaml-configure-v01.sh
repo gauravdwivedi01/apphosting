@@ -15,7 +15,8 @@ SPARK_HOME="/usr/hdp/2.6.2.38-1/spark2"
 YAML_FILE="$SAX_INSTALLATION_DIR/conf/yaml/env-config.yaml"
 CLOUD_TEMPLATE_YAML_FILE="$SAX_INSTALLATION_DIR/conf/yaml/templates/azure-template/cloud-conf-template.yaml"
 PROP_FILE="$SAX_INSTALLATION_DIR/conf/config.properties"
-
+BKP_YAML_FILE="$SAX_INSTALLATION_DIR/conf/yaml/bkp-env-config.yaml"
+BKP_CLOUD_TEMPLATE_YAML_FILE="$SAX_INSTALLATION_DIR/conf/yaml/templates/azure-template/bkp-cloud-conf-template.yaml"
 
 echo "--------------------------------------------------------------------------------"
 echo "User is : $(whoami)  !!" 
@@ -307,8 +308,11 @@ echo "env-config.yaml & config.properties file updation completed successfully !
 
 ## renaming conf/yaml/env-config.yaml & moving cloud-conf-template.yaml to conf/yaml
 
-mv $CLOUD_TEMPLATE_YAML_FILE $BKP_YAML_FILE
-cp $CLOUD_TEMPLATE_YAML_FILE $CLOUD_TEMPLATE_YAML_FILE
+#mv $CLOUD_TEMPLATE_YAML_FILE $BKP_YAML_FILE
+#cp $CLOUD_TEMPLATE_YAML_FILE $CLOUD_TEMPLATE_YAML_FILE
+cp $CLOUD_TEMPLATE_YAML_FILE $BKP_CLOUD_TEMPLATE_YAML_FILE
+cp $YAML_FILE $BKP_YAML_FILE
+mv $CLOUD_TEMPLATE_YAML_FILE $YAML_FILE
 ##echo "-----------------AMBARI_SERVICES-----------------"
 
 ##AMBARI_SERVICES=$(curl -u $HDI_CREDS -X GET $HDINSIGHT_URLBASE/services | grep service_name| awk -F":" '{print $2}')
