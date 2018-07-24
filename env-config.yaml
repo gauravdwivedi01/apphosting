@@ -1,0 +1,294 @@
+sax-config:
+  env-config:
+    zk:
+      hosts: localhost:2181
+    
+    spark:
+      home: /usr/hdp/2.4.2.0-258/spark
+      #Spark cluster manager details accepts 2 types of values "yarn" or "standalone"
+      cluster.manager: "yarn"
+      master: spark://localhost:7077
+      ui.host: localhost
+      ui.port: 8080
+      rest.master: localhost:6066
+      history.server: localhost:18080
+      yarn:
+           resource.manager.host: localhost
+           resource.manager.webapp.port: 8088
+           proxy.server.port: 8088
+           resource.manager.port: 8050
+           resource.manager.isHA: "false"
+           resource.manager.ha.address.names: "rm1,rm2"
+           resource.manager.ha.address.hosts: "localhost1:8032,localhost2:8032"
+      hadoop:
+        isHDP: "true"
+      #job-server,spark-submit, livy
+      job.submit.mode: "spark-submit"
+      jobServer.url: "localhost:8092"
+      jobServer.logDir: "/home/job-server/spark-jobserver-latest/spark-jobserver-0.6.2/sax"
+      jobserver.spark.home: "/home/spark-1.6.1-bin-hadoop2.6/"
+      livy.url: "http://localhost:8998"
+
+    rabbitmq:
+      # This is a comma separated host:port pairs.
+      host: localhost:5672
+      port: 5672
+      username: guest
+      password: guest
+      stompUrl : http://localhost:15674/stomp
+      virtualHost: "/"
+      web.url : http://localhost:15672
+      
+    activemq:
+      host: localhost:61616
+      username: admin
+      password: admin
+      stomp.connection.url: localhost:61613
+      
+    jdbc:
+      driver: org.postgresql.Driver      
+      url: "jdbc:postgresql://localhost:5432/streamanalytix"
+      username: "postgres"
+      password: "postgres"
+
+    ldap: 
+      url: "ldap://localhost:10389"
+      userDn: "cn=Manager,o=streamanalytix"
+      password: "ldap"
+      userSearchBase: "ou=People,o=streamanalytix"
+      groupSearchBase: "ou=Groups,o=streamanalytix"
+      groupSearchFilter: "(member={0})"
+      userSearchFilter: "uid={0}"
+      groupname:
+        admin.role: ""
+        developer.role: ""
+        devops.role: ""
+        tier2.role: ""
+
+    activiti:
+      db: postgresql
+      jdbc: 
+        driver: org.postgresql.Driver
+        url: "jdbc:postgresql://localhost:5432/activiti"
+        username: postgres
+        password: postgres
+      mailserver:
+        host: server-020.impetus.co.in
+        port: 25
+        username: BDappTest@server-020.impetus.co.in
+        password: 9c-qxGJy
+        default.from: BDappTest@server-020.impetus.co.in
+        ssl.enabled: false
+        tsl.enabled: false
+      history: none
+      alert.email.charset: UTF-8
+      alert.email.from: BDappTest@server-020.impetus.co.in
+      alert.email.html: ""
+    storm:
+      #Storm cluster manager details accepts 2 types of values "yarn" or "standalone"
+      cluster.manager: "standalone"
+      ui.host: "localhost"
+      nimbus:
+        host: localhost
+        thrift.port: 6627
+        ui.port: 9090
+        seeds: ""
+        ha.enabled: "false"
+      impersonation:
+        enabled: "false"
+        target.user: ""
+      yarn:
+        resource.manager.host: localhost
+        resource.manager.port: 8088        
+      spout.zk.servers: localhost
+      spout.zk.port: 2181
+      supervisors.servers: ""
+    
+    graphite:
+      host: localhost
+      port: 2003
+      ui.port: 8080
+  
+    intellicus:
+      reportClientPath: "common/dashboard-int/ReportClient.properties"
+      sax.orgId: Org_SAX
+      sax.connName: Conn_SAX
+      superadmin.userid: Admin
+      superadmin.password: Admin
+      superadmin.organization: Intellica
+      sax.url: "http://localhost/intellicus"
+
+    couchbase:
+      host: localhost
+      port: 8091/pools
+      http.url: "http://"
+      password: Administrator
+      username: Administrator
+      defaultbucket.memorysize: 500
+      defaultbucket.replicano: 1
+      polling.timeout: 120000
+      polling.sleeptime: 2000
+      bucketlist: "CDR:CDR"
+      maxpoolsize: 1
+      params:
+        com.streamanalytix.storm.bolt.SampleBolt: CDR
+    
+    ambari:
+      collector.host: localhost
+      collector.port: 6188
+
+    kerberos:
+      krb.config.override: "true"
+      dfs.namenode.kerberos.principal: "nn/_HOST@REALM"
+      dfs.core.site.location: ""
+      hbase.master.kerberos.principal: "hbase/_HOST@REALM"
+      hbase.regionserver.kerberos.principal: "hbase/_HOST@REALM"
+      hive.metastore.kerberos.principal: "hive/_HOST@REALM"
+      hive.hiveserver2.kerberos.principal: "hive/_HOST@REALM"
+      yarn.resourcemanager.kerberos.principal: "rm/_HOST@REALM"
+           
+    # ENVIRONMENT SETUP
+    clusterconfig:
+      manager:
+        # Cluster or distribution manager types "ambari" or "cdh"
+        type: "ambari"
+        url: "http://localhost:8080"
+        username: "admin"
+        password: "admin"
+        clustername: ""
+      # Spark versions "spark2" or "spark1"
+      spark.version: "spark2"
+           
+    system-config:
+      # ___1. GENERAL
+      # Creates default connection for the components specified in this property.
+      components.supported: rabbitmq,activemq,kafka,hbase,cassandra,solr,elasticsearch,hdfs,hiveEmitter
+      # Database used by application. Possible values are mysql, postgresql, oracle
+      database.dialect: postgresql
+      # Message Queuing System related properties. Possible values are RABBITMQ (for rabbitMQ) or ACTIVEMQ (for activeMQ) ######
+      messaging.type: RABBITMQ
+      # Monitoring reporter type. Possible values should be comma separated graphite,console,logger
+      sax.monitoring.reporters.supported: rabbitmq
+      # Installation directory of bundle
+      sax.installation.dir: "."
+      # UI properties #####
+      sax.ui.host: localhost
+      sax.web.url: http://localhost:8090/StreamAnalytix
+      sax.ui.port: 8090
+      logmonitoring.ui.host: localhost
+      logmonitoring.ui.port: 8090
+      # ___2. ELASTICSEARCH
+      elasticsearch:
+        cluster.name: sax_es_cluster
+        connect: localhost:9300
+        http.connect: localhost:9200
+        embedded.data.dir: /tmp/eDataDir
+        embedded.http.enabled: true
+        embedded.node.name: sax_es_node
+        embedded.data.enabled: true
+        embedded.local.enabled: false  
+        httpPort: 9200
+        shield.enabled: "false"
+        shield.password.access.enabled: "false"
+        shield.user.name: "elastic"
+        shield.user.password: "changeme"
+        shield.hostname.resolvename: "false"
+        shield.hostname.verification: "false"
+        shield.http.ssl: "false"
+        shield.keystore.enabled: "false"
+        shield.ssl.certificate.verification: "false"
+        shield.ssl.enabled: "false"
+        shield.ssl.hostname_verification: "false"
+        shield.ssl.hostname_verification.resolve_name: "false"
+        shield.truststore.enabled: "false"
+        shield.transport.ssl: "false"
+        shield.ssl.keystore.key_password: ""
+        shield.ssl.keystore.password: ""
+        shield.ssl.keystore.path: ""
+        shield.ssl.truststore.password: ""
+        shield.ssl.truststore.path: ""      
+      # ___3. SOLR
+      solr:
+        zk.hosts: localhost:2181
+        config.version: 4.10.2
+      # ___4. HDFS
+      hadoop:
+        ha.enabled: false      
+        hdfs.uri: "hdfs://localhost:9000/"      
+        hdfs.user: "hdfs"
+        dfs.nameservices: ""
+        dfs.namenode1.details: ""
+        dfs.namenode2.details: ""       
+      # ___5. HBASE    
+      hbase:
+        zk.hosts: localhost
+        zk.port: 2181
+        client.retries.number: 1
+        zk.parent.node: /hbase
+        zk.recovery.retry: 1
+      # ___6. CASSANDRA
+      cassandra:
+        hosts: localhost:9042
+        username: cassandra
+        password: cassandra
+        thrift.client.retries: 5
+        thrift.client.retries.interval.ms: 5000
+        keyspace.replication.factor: 1
+        keyspace.replication.strategy: org.apache.cassandra.locator.SimpleStrategy
+        connection.retries: 1
+      # ___7. INDEX common default properties
+      index:
+        # Possible values are elasticsearch, solr
+        type: elasticsearch
+        replication.factor: 2
+        isbatch.enable: false
+        batch.size: 1
+        across.field.search.enabled: true
+        noofshards: 2
+        routing.required: false
+        source: true
+        retries: 5
+        retries.interval.ms: 3000
+        ttl.insec: "259200"
+      # ___8. PERSISTENCE common default properties
+      persistence:
+        # Possible values are hbase, cassandra
+        store: hbase
+        isbatch.enable: false
+        batch.size: 1
+        compression: false
+      # ___9. RABBIT MQ
+      rmq:
+        exchangeName: selfTestExchange
+        queueName: selfTestQueue
+        status.exchangeName: pushStatusExchange
+        status.queueName: pushStatusQueue
+      # ___10. KAFKA
+      kafka:
+        metadata.broker.list: localhost:9092
+        zk.servers: localhost:2181
+        topic.administration: false
+      # ___11. INGESTION TYPE
+      # 0-persistence+indexing, 1-Persistence, 2-Indexing & 3&Up-None
+      ingestion.type: 0
+      # ___12. METRIC SERVER (ambari/graphite)
+      sax.metric.server: "ambari"
+      # ___13. User Authentication and Authorization source
+      authentication.source: "db"
+      authorization.source: "db"
+      superuser.authentication.source: "db"
+      #___14. HIVE
+      hive:
+        metaStoreURI: thrift://localhost:9083
+        #___HiveServer2 JDBC URL
+        hiveServer2: jdbc:hive2://localhost:10000
+        #___HiveServer2 JDBC Password
+        hiveServer2Password: ""
+      oozie:
+        server.url: "http://localhost:11000/oozie/"
+        libPath: "/user/oozie/share/lib"
+        namenodeUri: "hdfs://localhost:9000/"
+        jobtrackerURL: "localhost:8032"
+        workflowNotificationURL: "/workflow/ackWorkflowStatus/${tenantId}/$jobId/$status"
+        actionNotificationURL: "/workflow/ackWorkflowActionStatus/${tenantId}/$jobId/$nodeName/$status"
+        coordinatorActionNotificationURL: "/workflow/ackWorkflowActionStatus/${tenantId}/$jobId/$actionId/$status"
